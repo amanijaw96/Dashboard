@@ -45,7 +45,6 @@ const TopMenu = ({ handleDrawerToggle }) => {
 			>
 				<Box
 					style={cursorPointer}
-					onClick={() => (window.location.href = adminRoot)}
 					sx={{
 						display: "flex",
 						alignItems: "center",
@@ -60,7 +59,12 @@ const TopMenu = ({ handleDrawerToggle }) => {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6" noWrap component="div">
+					<Typography
+						onClick={() => (window.location.href = adminRoot)}
+						variant="h6"
+						noWrap
+						component="div"
+					>
 						<FormattedMessage id={"apptitle"}></FormattedMessage>
 					</Typography>
 				</Box>

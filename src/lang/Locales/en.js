@@ -31,4 +31,5 @@ module.exports = {
 	deleteUser: "Delete User",
 	deleteSuccess: " Successfully Deleted",
 	Logout: "Logout",
+	setting: "Settings",
 };

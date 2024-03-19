@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -17,7 +17,9 @@ import { yupUserName, yupPassword, Schema } from "../utils/validations";
 import { useDispatch } from "react-redux";
 import { Login } from "../utils/api/services";
 import { setTokens } from "../utils/storageHandler";
+import Loader from "../components/Common/Loader";
 const LoginPage = () => {
+	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
 
 	const validationSchema = Schema({
@@ -26,16 +28,20 @@ const LoginPage = () => {
 	});
 
 	const handleLogin = (values) => {
-		Login(values).then((rsp) => {
-			dispatch({
-				type: SET_USER,
-				payload: {
-					...rsp?.data,
-				},
-			});
-			setTokens({ access_token: rsp?.data?.token });
-			window.location.href = "/app";
-		});
+		setLoading(true);
+		Login(values)
+			.then((rsp) => {
+				setLoading(false);
+				dispatch({
+					type: SET_USER,
+					payload: {
+						...rsp?.data,
+					},
+				});
+				setTokens({ access_token: rsp?.data?.token });
+				window.location.href = "/app";
+			})
+			.then((err) => setLoading(false));
 	};
 
 	const formik = useFormik({
@@ -49,7 +55,9 @@ const LoginPage = () => {
 		},
 	});
 
-	return (
+	return loading ? (
+		<Loader></Loader>
+	) : (
 		<>
 			<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
 				<LockOutlinedIcon />

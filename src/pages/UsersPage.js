@@ -1,4 +1,3 @@
-import Grid from "@mui/material/Grid";
 import { Translate } from "../utils/utils";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
@@ -6,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { GetUsers, AddUser } from "../utils/api/services";
 import { columns } from "../constants";
-import CircularProgress from "@mui/material/CircularProgress";
 import Loader from "../components/Common/Loader";
 import Box from "@mui/material/Box";
 import UserFormModal from "../components/Users/UserFormModal";
@@ -16,6 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useAppContext } from "../App";
 import { FormattedMessage } from "react-intl";
 import DeleteWarninModal from "../components/Common/DeleteWarninModal";
+
 const UsersPage = () => {
 	const { SetAlert } = useAppContext();
 	const [users, setUsers] = useState([]);
@@ -41,7 +40,7 @@ const UsersPage = () => {
 
 	const handleUserFormSubmit = (user) => {
 		setloading(true);
-		if (rowSelectionModel.length == 1) {
+		if (rowSelectionModel.length === 1) {
 			setloading(false);
 			setModalOpen(false);
 			const index = users.findIndex((item) => item.id === rowSelectionModel[0]);
@@ -108,7 +107,7 @@ const UsersPage = () => {
 								<DeleteIcon fontSize="inherit" />
 							</IconButton>
 						)}
-						{rowSelectionModel.length == 1 && (
+						{rowSelectionModel.length === 1 && (
 							<IconButton
 								sx={{ mr: 2 }}
 								aria-label="edit"
@@ -142,7 +141,13 @@ const UsersPage = () => {
 			</div>
 			<UserFormModal
 				open={ModalOpen}
-				toggle={() => setModalOpen((curr) => !curr)}
+				toggle={() => {
+					setModalOpen((curr) => !curr);
+				}}
+				onClose={() => {
+					setModalOpen(false);
+					setRowSelectionModel([]);
+				}}
 				handleSubmit={handleUserFormSubmit}
 				UserData={
 					rowSelectionModel.length === 1 &&

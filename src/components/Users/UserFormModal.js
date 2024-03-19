@@ -1,31 +1,19 @@
 import * as React from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { Unstable_NumberInput as NumberInput } from "@mui/base/Unstable_NumberInput";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import { FormattedMessage } from "react-intl";
 import { useFormik } from "formik";
-import { SET_USER } from "../../constants";
 import {
-	yupEmail,
-	yupPassword,
 	Schema,
 	yupFirstName,
 	yupLastName,
 	yupAge,
 } from "../../utils/validations";
 
-const UserFormModal = ({ open, toggle, handleSubmit, UserData }) => {
+const UserFormModal = ({ open, toggle, onClose, handleSubmit, UserData }) => {
 	const validationSchema = Schema({
 		firstName: yupFirstName,
 		lastName: yupLastName,
@@ -52,7 +40,7 @@ const UserFormModal = ({ open, toggle, handleSubmit, UserData }) => {
 
 	return (
 		<React.Fragment>
-			<Dialog open={open} onClose={toggle}>
+			<Dialog open={open} onClose={onClose}>
 				<DialogTitle>
 					{UserData ? (
 						<FormattedMessage id={"user.edit"}></FormattedMessage>

@@ -6,20 +6,20 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import ViewListIcon from "@mui/icons-material/ViewList";
-
+import { Translate } from "../utils/utils";
+import { appBar } from "../assets/ConstantStyles";
 const AppDrawer = () => {
 	const MenuItems = [
 		{
 			id: 1,
-			label: "Users",
+			label: Translate("Users"),
 			Icon: <PeopleAltIcon />,
 			url: "/app/users",
 		},
 	];
 	return (
 		<div>
-			<Toolbar />
+			<Toolbar style={appBar}>{Translate("setting")}</Toolbar>
 			<Divider />
 			<List>
 				{MenuItems.map((item, index) => {

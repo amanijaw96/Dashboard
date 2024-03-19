@@ -3,28 +3,22 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Avatar from "@mui/material/Avatar";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 const UserLayout = ({ children }) => {
 	return (
 		<Grid container component="main" sx={{ height: "100vh" }}>
 			<CssBaseline />
-			<Grid
-				item
-				xs={false}
-				sm={4}
-				md={7}
-				sx={{
-					backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
-					backgroundRepeat: "no-repeat",
-					backgroundColor: (t) =>
-						t.palette.mode === "light"
-							? t.palette.grey[50]
-							: t.palette.grey[900],
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-				}}
-			/>
+			<Grid item xs={false} sm={4} md={7}>
+				<LazyLoadImage
+					alt={"d"}
+					src={"https://source.unsplash.com/random?wallpapers"}
+					width={"100%"}
+					height={"100%"}
+					effect="blur"
+					objectFit={"cover"}
+				/>
+			</Grid>
 			<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
 				<Box
 					sx={{

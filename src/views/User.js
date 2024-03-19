@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
-import CircularProgress from "@mui/material/CircularProgress";
 import Loader from "../components/Common/Loader";
 const LoginPage = React.lazy(() =>
 	import(/* webpackChunkName: "user-login" */ "../pages/LoginPage.js")

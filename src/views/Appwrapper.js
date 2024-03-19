@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import AppLayout from "../layouts/AppLayout";
-import CircularProgress from "@mui/material/CircularProgress";
 import Loader from "../components/Common/Loader";
 
 const DashboardPage = React.lazy(() =>
