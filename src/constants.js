@@ -258,3 +258,15 @@ export const AreaChartData2 = [
 	4495,
 	4477,
 ];
+
+export const columns = [
+	{ field: "id", headerName: "ID", width: 250 },
+	{ field: "firstName", headerName: "First name", width: 230 },
+	{ field: "lastName", headerName: "Last name", width: 230 },
+	{
+		field: "age",
+		headerName: "Age",
+		type: "number",
+		width: 130,
+	},
+];

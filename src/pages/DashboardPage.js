@@ -15,7 +15,7 @@ import {
 const DashboardPage = () => {
 	return (
 		<Grid container spacing={3}>
-			<Grid item xs={12} md={8} lg={6}>
+			<Grid item xs={12} md={12} lg={6}>
 				<BarChart
 					data={BarChartData}
 					text={Translate("bar.title")}
@@ -26,21 +26,21 @@ const DashboardPage = () => {
 					DataName={Translate("Population")}
 				></BarChart>
 			</Grid>
-			<Grid item xs={12} md={4} lg={6}>
+			<Grid item xs={12} md={12} lg={6}>
 				<PieChart
 					data={PieData}
 					title={Translate("pie.title")}
 					DataName={Translate("Percentage")}
 				></PieChart>
 			</Grid>
-			<Grid item xs={12} md={4} lg={6}>
+			<Grid item xs={12} md={12} lg={6}>
 				<DougnutChart
 					data={DoughnutData}
 					DataName={Translate("Users")}
 					title={Translate("Users.activeonWeekend")}
 				></DougnutChart>
 			</Grid>
-			<Grid item xs={12} md={4} lg={6}>
+			<Grid item xs={12} md={12} lg={6}>
 				<AreaChart
 					DataSeries={[
 						{

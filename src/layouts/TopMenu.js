@@ -11,8 +11,9 @@ import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
-
-const settings = ["Logout"];
+import { adminRoot } from "../constants";
+import { cursorPointer } from "../assets/ConstantStyles";
+import { deleteUser, deleteTokens } from "../utils/storageHandler";
 
 const TopMenu = ({ handleDrawerToggle }) => {
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -22,6 +23,12 @@ const TopMenu = ({ handleDrawerToggle }) => {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
+	const Logout = () => {
+		deleteUser();
+		deleteTokens();
+		window.location.href = "/user/login";
+	};
+	const settings = [{ Text: "Logout", handleClick: Logout }];
 	return (
 		<AppBar
 			position="fixed"
@@ -36,7 +43,14 @@ const TopMenu = ({ handleDrawerToggle }) => {
 					justifyContent: "space-between",
 				}}
 			>
-				<Box>
+				<Box
+					style={cursorPointer}
+					onClick={() => (window.location.href = adminRoot)}
+					sx={{
+						display: "flex",
+						alignItems: "center",
+					}}
+				>
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
@@ -73,8 +87,10 @@ const TopMenu = ({ handleDrawerToggle }) => {
 						onClose={handleCloseUserMenu}
 					>
 						{settings.map((setting) => (
-							<MenuItem key={setting} onClick={handleCloseUserMenu}>
-								<Typography textAlign="center">{setting}</Typography>
+							<MenuItem key={setting} onClick={setting?.handleClick}>
+								<Typography textAlign="center">
+									<FormattedMessage id={setting?.Text} />
+								</Typography>
 							</MenuItem>
 						))}
 					</Menu>

@@ -14,6 +14,7 @@ const AppDrawer = () => {
 			id: 1,
 			label: "Users",
 			Icon: <PeopleAltIcon />,
+			url: "/app/users",
 		},
 	];
 	return (
@@ -22,9 +23,14 @@ const AppDrawer = () => {
 			<Divider />
 			<List>
 				{MenuItems.map((item, index) => {
-					console.log(item);
 					return (
-						<ListItem key={item?.id} disablePadding>
+						<ListItem
+							key={item?.id}
+							disablePadding
+							component={"a"}
+							href={item?.url}
+							button
+						>
 							<ListItemButton>
 								<ListItemIcon>{item?.Icon}</ListItemIcon>
 								<ListItemText primary={item?.label} />

@@ -13,32 +13,39 @@ import CopyRight from "../components/Common/CopyRight";
 import { FormattedMessage } from "react-intl";
 import { useFormik } from "formik";
 import { SET_USER } from "../constants";
-import { yupEmail, yupPassword, Schema } from "../utils/validations";
+import { yupUserName, yupPassword, Schema } from "../utils/validations";
 import { useDispatch } from "react-redux";
-
+import { Login } from "../utils/api/services";
+import { setTokens } from "../utils/storageHandler";
 const LoginPage = () => {
 	const dispatch = useDispatch();
 
 	const validationSchema = Schema({
-		email: yupEmail,
+		username: yupUserName,
 		password: yupPassword,
 	});
 
-	const formik = useFormik({
-		initialValues: {
-			email: "foobar@example.com",
-			password: "Password@123",
-		},
-		validationSchema: validationSchema,
-		onSubmit: (values) => {
-			console.log(values);
+	const handleLogin = (values) => {
+		Login(values).then((rsp) => {
 			dispatch({
 				type: SET_USER,
 				payload: {
-					...values,
-					user_id: 3,
+					...rsp?.data,
 				},
 			});
+			setTokens({ access_token: rsp?.data?.token });
+			window.location.href = "/app";
+		});
+	};
+
+	const formik = useFormik({
+		initialValues: {
+			username: "atuny0",
+			password: "9uQFF1Lh",
+		},
+		validationSchema: validationSchema,
+		onSubmit: (values) => {
+			handleLogin(values);
 		},
 	});
 
@@ -55,14 +62,14 @@ const LoginPage = () => {
 					margin="normal"
 					required
 					fullWidth
-					id="email"
-					label="Email Address"
-					name="email"
-					value={formik.values.email}
+					id="username"
+					label="User Name"
+					name="username"
+					value={formik.values.username}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
-					error={formik.touched.email && Boolean(formik.errors.email)}
-					helperText={formik.touched.email && formik.errors.email}
+					error={formik.touched.username && Boolean(formik.errors.username)}
+					helperText={formik.touched.username && formik.errors.username}
 					autoFocus
 				/>
 				<TextField
